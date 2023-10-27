@@ -1,9 +1,11 @@
 @import 'utils/variables';
 @import 'components/header';
 @import 'components/menu';
+@import 'utils/mixins';
+@import 'utils/placeholders';
 
-.header-span {
-  color: #2196F3;
+.header__span {
+  color: getColor('main');
   font-family: Raleway;
   font-size: 26px;
   font-style: normal;
@@ -13,7 +15,7 @@
   text-decoration: none;
 }
   
-.header-h1 {
+.header {
   color: #000;
   font-family: Raleway;
   font-size: 26px;
@@ -38,7 +40,7 @@
   justify-content: space-evenly;
 }
   
-.menu-item {
+.menu__item {
   list-style: none;
   transition: -webkit-text-decoration 1000ms ease-in;
   transition: text-decoration 1000ms ease-in;
@@ -47,7 +49,7 @@
   padding-bottom: 4px;
 }
   
-.menu-item::before {
+.menu__item::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -59,7 +61,7 @@
   transition: transform 500ms ease-out;
 }
   
-.menu-item:hover::before {
+.menu__item:hover::before {
   /* width: 100%; */
   transform: scale(1.5);
 }
@@ -74,12 +76,15 @@ hr {
 .twitter-logo,
 .facebook-logo,
 .linked_in-logo {
-  /* stroke: #757575; */
   width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover path {
+    fill: white;
+  }
 }
   
 .instagram-logo:hover path,
@@ -87,10 +92,6 @@ hr {
 .facebook-logo:hover path,
 .linked_in-logo:hover path {
   fill: white;
-}
-  
-.ellipse:hover {
-  background-color: #2196F3;
 }
   
 .ellipse:hover path {
@@ -105,6 +106,10 @@ hr {
   align-items: center;
   background-color: #fff;
   border-radius: 50%;
+
+  &:hover {
+    background-color: #2196F3;
+  }
 }
   
 .client:hover rect {
@@ -118,11 +123,10 @@ hr {
 .email,
 .phone-number {
   fill: #757575;
-}
-  
-.email:hover path,
-.phone-number:hover path {
-  fill: #2196F3;
+
+  &:hover path {
+    fill: #2196F3;
+  }
 }
   
 .title {
@@ -161,13 +165,13 @@ hr {
   align-items: center;
   border-radius: 50%;
   background-color: #2F303A;
+
+  &:hover path {
+    color: #2196F3;
+  }
 }
   
-.svg-container:hover path {
-  color: #2196F3;
-}
-  
-.header-btn {
+.header__btn {
   width: 216px;
   height: 50px;
   border-radius: 4px;
@@ -182,7 +186,7 @@ hr {
   left: 900px;
 }
   
-.header-btn-text {
+.header_btn_text {
   color: #FFF;
   text-align: center;
   font-family: Roboto;
@@ -198,10 +202,10 @@ hr {
   bottom: 72px;
   background: none;
   border: none;
-}
-  
-.close-btn:hover path {
-  fill: #2196F3;
+
+  &:hover path {
+    fill: #2196F3;
+  }
 }
   
 .backdrop {
@@ -367,7 +371,7 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  }
+}
   
   .header-h1 {
     color: #000;
@@ -413,15 +417,7 @@ span {
   height: 294px;
 }
   
-.div-1,
-.div-2,
-.div-3,
-.div-4,
-.div-5,
-.div-6,
-.div-7,
-.div-8,
-.div-9 {
+.portfolio__card {
   width: 370px;
   height: 440px;
   display: flex;
@@ -431,15 +427,7 @@ span {
   box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.16), 0px 4px 4px 0px rgba(0, 0, 0, 0.06), 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
 }
   
-.h1-1,
-.h1-2,
-.h1-3,
-.h1-4,
-.h1-5,
-.h1-6,
-.h1-7,
-.h1-8,
-.h1-9 {
+.portfolio__header {
   color: #212121;
   font-family: Roboto;
   font-size: 18px;
@@ -451,15 +439,7 @@ span {
   padding-left: 24px;
 }
   
-.h2-1,
-.h2-2,
-.h2-3,
-.h2-4,
-.h2-5,
-.h2-6,
-.h2-7,
-.h2-8,
-.h2-9 {
+.portfolio__subheader {
   color: #757575;
   font-family: Roboto;
   font-size: 16px;
@@ -482,6 +462,10 @@ span {
   width: 100%;
   height: 80%;
   overflow: hidden;
+
+  &:hover .overlay {
+    transform: translateY(0);
+  }
 }
   
 .actions {
@@ -508,14 +492,10 @@ span {
   width: 100%;
   height: 100%;
   transform: translateY(100%);
-  transition: 1s ease-in;
+  transition: 0.7s ease-in-out;
 }
   
-.img_wrapper:hover .overlay {
-  transform: translateY(0);
-}
-  
-.overlay-text {
+.overlay__text {
   color: #FFF;
   font-family: Roboto;
   font-size: 18px;
@@ -537,6 +517,8 @@ span {
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1.08px;
+  margin-top: 94px;
+  margin-bottom: 50px;
 }
   
 .img-card {
@@ -988,23 +970,95 @@ span {
   background: rgba(47, 48, 58, 0.8);
 }
 
-.header-img {
+.header__img {
   width: 100%;
 }
 
-.header-text {
+.header__text {
   color: #FFF;
-text-align: center;
-font-family: Roboto;
-font-size: 44px;
-font-style: normal;
-font-weight: 900;
-line-height: 60px;
-letter-spacing: 2.64px;
-text-transform: uppercase;
-position: absolute;
-width: 696px;
-height: 120px;
-top: 280px;
-left: 630px;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 60px;
+  letter-spacing: 2.64px;
+  text-transform: uppercase;
+  position: absolute;
+  width: 696px;
+  height: 120px;
+  top: 280px;
+  left: 630px;
+}
+
+.section__header {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  width: 270px;
+  height: 16px;
+}
+
+.section__text {
+  color: #757575;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.42px;
+  text-align: left;
+  width: 270px;
+  height: 72px;
+}
+
+.client__header {
+  color: #212121;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.08px; 
+  padding-bottom: 50px;
+}
+
+.command_member_card {
+  width: 270px;
+  height: 428px;
+  border-radius: 0px 0px 4px 4px;
+  background: #FFF;
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.20), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.command_member_info,
+.command_member_job {
+  text-align: center;
+}
+
+.command_member_info {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.48px;
+}
+
+.command_member_job {
+  color: getColor('accent');
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.48px;
+}
+
+.command_member_image {
+  height: 260px;
 }
